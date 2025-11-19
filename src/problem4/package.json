@@ -1,0 +1,20 @@
+{
+  "name": "three-ways-sum-to-n",
+  "version": "1.0.0",
+  "description": "Three unique TypeScript implementations to calculate sum from 1 to n",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "test": "ts-node src/test.ts",
+    "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0",
+    "@types/node": "^20.0.0"
+  },
+  "keywords": ["typescript", "algorithms", "summation"],
+  "author": "",
+  "license": "MIT"
+}
