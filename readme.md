@@ -94,6 +94,11 @@ cd src/problem6
 # See README for architecture details
 ```
 
+## References
+
+- ChatGPT: https://chat.openai.com/chat
+- [System Design Interview](https://www.amazon.com.au/System-Design-Interview-Insiders-Guide/dp/1736049119/ref=asc_df_1736049119?mcid=8920a76a11fa3ff79a07686d12376f3b&tag=googleshopdsk-22&linkCode=df0&hvadid=712272731659&hvpos=&hvnetw=g&hvrand=16206982597551200203&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9071836&hvtargid=pla-1645933631661&psc=1&gad_source=1) – An Insider's Guide: Volume 2 Chapter 10: Real-time Gaming Leaderboard
+
 ## License
 
 MIT
