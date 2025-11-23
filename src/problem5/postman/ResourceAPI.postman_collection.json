@@ -1,0 +1,484 @@
+{
+  "info": {
+    "name": "Resources API Collection",
+    "description": "Complete CRUD API collection for managing resources with TypeScript, Express, PostgreSQL, and Prisma ORM",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Create Resource",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test Resource\",\n  \"type\": \"sandbox\",\n  \"status\": \"active\",\n  \"metadata\": {\n    \"owner\": \"qa\",\n    \"region\": \"us-east-1\",\n    \"size\": \"medium\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/resources",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "resources"]
+        },
+        "description": "Create a new resource with name, type, status (optional), and metadata (optional)"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Resource\",\n  \"type\": \"sandbox\",\n  \"status\": \"active\",\n  \"metadata\": {\n    \"owner\": \"qa\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/resources",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "resources"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 1,\n  \"name\": \"Test Resource\",\n  \"type\": \"sandbox\",\n  \"status\": \"active\",\n  \"metadata\": {\n    \"owner\": \"qa\"\n  },\n  \"createdAt\": \"2025-11-23T10:00:00.000Z\",\n  \"updatedAt\": \"2025-11-23T10:00:00.000Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Resources",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/resources?limit=10&offset=0",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "resources"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "10",
+              "description": "Number of results to return (1-100)"
+            },
+            {
+              "key": "offset",
+              "value": "0",
+              "description": "Number of results to skip for pagination"
+            },
+            {
+              "key": "status",
+              "value": "active",
+              "description": "Filter by status",
+              "disabled": true
+            },
+            {
+              "key": "type",
+              "value": "compute",
+              "description": "Filter by type",
+              "disabled": true
+            }
+          ]
+        },
+        "description": "Retrieve a paginated list of resources with optional filters"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/resources?limit=10&offset=0",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "resources"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"resources\": [\n    {\n      \"id\": 1,\n      \"name\": \"Server Alpha\",\n      \"type\": \"compute\",\n      \"status\": \"active\",\n      \"metadata\": {\n        \"region\": \"us-east-1\"\n      },\n      \"createdAt\": \"2025-11-23T10:00:00.000Z\",\n      \"updatedAt\": \"2025-11-23T10:00:00.000Z\"\n    }\n  ],\n  \"total\": 5,\n  \"limit\": 10,\n  \"offset\": 0\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Resources with Filters",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/resources?status=active&type=compute&limit=5",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "resources"],
+          "query": [
+            {
+              "key": "status",
+              "value": "active"
+            },
+            {
+              "key": "type",
+              "value": "compute"
+            },
+            {
+              "key": "limit",
+              "value": "5"
+            }
+          ]
+        },
+        "description": "Retrieve resources filtered by status and type"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Resource by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/resources/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "resources", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1",
+              "description": "Resource ID"
+            }
+          ]
+        },
+        "description": "Retrieve a specific resource by its ID"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/resources/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "resources", "1"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 1,\n  \"name\": \"Server Alpha\",\n  \"type\": \"compute\",\n  \"status\": \"active\",\n  \"metadata\": {\n    \"region\": \"us-east-1\",\n    \"cpu\": 4,\n    \"ram\": 16\n  },\n  \"createdAt\": \"2025-11-23T10:00:00.000Z\",\n  \"updatedAt\": \"2025-11-23T10:00:00.000Z\"\n}"
+        },
+        {
+          "name": "Not Found Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/resources/999",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "resources", "999"]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"message\": \"Resource with ID 999 not found\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Resource (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated Resource\",\n  \"type\": \"storage\",\n  \"status\": \"inactive\",\n  \"metadata\": {\n    \"owner\": \"admin\",\n    \"updated\": true\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/resources/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "resources", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1",
+              "description": "Resource ID"
+            }
+          ]
+        },
+        "description": "Fully update a resource (all fields required)"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Resource\",\n  \"type\": \"storage\",\n  \"status\": \"inactive\",\n  \"metadata\": {\n    \"updated\": true\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/resources/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "resources", "1"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 1,\n  \"name\": \"Updated Resource\",\n  \"type\": \"storage\",\n  \"status\": \"inactive\",\n  \"metadata\": {\n    \"updated\": true\n  },\n  \"createdAt\": \"2025-11-23T10:00:00.000Z\",\n  \"updatedAt\": \"2025-11-23T10:30:00.000Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Patch Resource (PATCH)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"inactive\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/resources/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "resources", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1",
+              "description": "Resource ID"
+            }
+          ]
+        },
+        "description": "Partially update a resource (only provided fields are updated)"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"inactive\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/resources/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "resources", "1"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 1,\n  \"name\": \"Server Alpha\",\n  \"type\": \"compute\",\n  \"status\": \"inactive\",\n  \"metadata\": {\n    \"region\": \"us-east-1\"\n  },\n  \"createdAt\": \"2025-11-23T10:00:00.000Z\",\n  \"updatedAt\": \"2025-11-23T10:35:00.000Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Patch Resource - Update Metadata",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"metadata\": {\n    \"region\": \"us-west-2\",\n    \"environment\": \"production\",\n    \"tags\": [\"critical\", \"monitored\"]\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/resources/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "resources", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1",
+              "description": "Resource ID"
+            }
+          ]
+        },
+        "description": "Update only the metadata field of a resource"
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Resource",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/resources/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "resources", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1",
+              "description": "Resource ID"
+            }
+          ]
+        },
+        "description": "Delete a resource by its ID"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/resources/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "resources", "1"]
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "_postman_previewlanguage": null,
+          "header": [],
+          "body": null
+        },
+        {
+          "name": "Not Found Response",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/resources/999",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "resources", "999"]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"message\": \"Resource with ID 999 not found\"\n  }\n}"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}
